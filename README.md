@@ -54,7 +54,7 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 ### Explicații de Design
 
 
-![App Screenshot](./diagram.png)
+![Diagram](./diagram.png)
 
 
 * **Rețeaua Bridge și DHCP**: Se folosește un `bridge network` cu un **server DHCP** pentru a asigura un **IP static și unic** pentru fiecare VM în mod automat.
