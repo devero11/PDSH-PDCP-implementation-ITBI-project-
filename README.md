@@ -94,7 +94,6 @@
 
 # Setup
 
-<br>
 
 ## `copyVM`
 
@@ -114,18 +113,17 @@ Clonele sunt indexate de la `1` la `n`. În cazul în care scriptul este rulat d
 `-n` : numărul de clone
 
 <br>
-<br>
 
 ## `startVMs`
 
 Scriptul `./startVMs` pornește toate VM-urile dintr-un director specificat.
-De asemenea, permite configurarea unei `bridge network` și a unor `tap-uri` pentru fiecare nod VM.
+De asemenea, permite configurarea unui `bridge network` și a unor `tap-uri` pentru fiecare nod VM.
 
 !!! Important
 
-Pentru a te asigura că fiecare nod VM primește automat un `static ip`, trebuie să ai un `dhcp server` care rulează pe `bridge network`.
+Pentru a te asigura că fiecare nod VM primește automat un `ip static`, trebuie să ai un `server dhcp` care rulează pe `bridge network`.
 Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planificat momentan, sorry :3).
-`Bridge network` nu este persistentă.
+`Bridge network-ul` nu este persistent.
 
 ```bash
 ./startVMs -d directory -ns -b bridgeName
@@ -136,8 +134,7 @@ Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planifi
 
 `-d` : locația nodurilor
 `-ns` : setup pentru bridge network (dacă este omis, va fi necesar setup manual pentru fiecare nod)
-`-b` : numele bridge network (dacă este omis, valoarea implicită este `megatron`)
+`-b` : numele pentru bridge network (dacă este omis, valoarea implicită este `megatron`)
 
-<br>
 <br>
 
