@@ -1,6 +1,4 @@
-#DESCRIEREA PROBLEMEI
-
-
+# DESCRIEREA PROBLEMEI
 
   de ce e nevoie?
     --operarea mai multor sisteme/noduri in acelasi timp/in masa
@@ -103,7 +101,7 @@ Scriptul `./copyVM` creează un număr specificat de copii ale unei imagini VM d
 Clonele sunt indexate de la `1` la `n`. În cazul în care scriptul este rulat de mai multe ori, indexul continuă de la ultimul clone creat.
 
 ```bash
-./copyVM -i path/to/image -n 10
+./copyVM -i [path/to/image] -n [numberOfClones] 
 
 ```
 
@@ -126,7 +124,7 @@ Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planifi
 `Bridge network-ul` nu este persistent.
 
 ```bash
-./startVMs -d directory -ns -b bridgeName
+./startVMs -d [directory] -ns -b [bridgeName]
 
 ```
 
