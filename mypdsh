@@ -1,0 +1,32 @@
+#!/bin/bash
+
+IFS=','
+
+read -ra commaSplit <<< "$1"
+
+
+for val in "${commaSplit[@]}";
+do
+ echo "$val"
+done
+
+for val in "${commaSplit[@]}";
+do
+  mapfile -t brksContent < <(echo "$val" | grep -oP '(?<=\[).*?(?=\])')
+done
+
+
+
+for element in "${brksContent[@]}"; do
+    if [[ $element =~ ^[0-9,-]+$ ]]; then
+        echo "'$element' is valid"
+    else
+        echo "'$element' is invalid"
+    fi
+done
+
+
+
+foo1,foo2,foo3
+foo[1-5]
+foo[1-5,10],foo10

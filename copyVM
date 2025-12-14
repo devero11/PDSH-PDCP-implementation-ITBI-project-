@@ -1,0 +1,19 @@
+#!/bin/bash
+
+folder="./VMs"
+original="$folder/foo1.qcow2"
+
+n="$1"
+
+last=$(ls "$folder"/foo* 2>/dev/null | sort | tail -n 1)
+
+num=${last##*foo}
+num=${num%.*}
+
+next=$((num + 1))
+
+for ((i=0; i<n; i++))
+do
+    cp "$original" "$folder/foo$((next + i)).qcow2"
+done
+
