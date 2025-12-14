@@ -13,8 +13,13 @@ The clones are indexed from `1` to `n`. In case the script is called multiple ti
     ./copyVM -i path/to/image -n 10
 
 ```
+
+
+
 `-i` : VM image location
 `-n` : number of clones
+
+
 
 
 `startVMs`
@@ -32,8 +37,14 @@ The `bridge network` is not persistent.
 
 ```
 
+
+
 `-d` : nodes location
 `-ns` : bridge network setup(if ommited, manual setup will be needed for each node) 
 `-b` : bridge network name(if ommited, defaults to `megatron`)
+
+
+
+
 
 # Implementations
