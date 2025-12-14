@@ -11,7 +11,7 @@
 
 ### Soluții Posibile
 
-Reimplementarea utilitarelor standard pentru execuția paralelă de comenzi și transferul de fișiere:
+Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și transferul de fișiere:
 * **`pdsh`**: Rularea de comenzi în paralel.
 * **`pdcp`**: Încărcarea (upload) de fișiere în paralel.
 * **`rpdcp`**: Descărcarea (download) de fișiere în paralel.
@@ -52,6 +52,10 @@ Reimplementarea utilitarelor standard pentru execuția paralelă de comenzi și 
 
 
 ### Explicații de Design
+
+
+![App Screenshot](./diagram.png)
+
 
 * **Rețeaua Bridge și DHCP**: Se folosește un `bridge network` cu un **server DHCP** pentru a asigura un **IP static și unic** pentru fiecare VM în mod automat.
     * *Motivație*: Fără un IP unic și cunoscut, VM-urile nu pot fi accesate.
