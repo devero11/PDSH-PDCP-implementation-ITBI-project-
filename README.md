@@ -3,9 +3,13 @@
 !!! Limited functionality, work in progress !!!
 
 # Setup
-  
+<br>  
+
 `copyVM`
+ 
+<br>
   
+
 The script `./copyVM` creates a speficied amount copies of a specified VM image.
 The clones are indexed from `1` to `n`. In case the script is called multiple times the index continues from the last clone.
   
@@ -15,13 +19,14 @@ The clones are indexed from `1` to `n`. In case the script is called multiple ti
 ```
   
   
+ <br> 
   
 `-i` : VM image location  
 `-n` : number of clones  
   
-  
  <br> 
-  
+ <br> 
+
 `startVMs`  
   
 The script `./startVMs` starts up all the VMs in a specified directory.  
@@ -37,13 +42,14 @@ The `bridge network` is not persistent.
     ./startVMs -d directory -ns -b bridgeName
 
 ```
-  
+ <br> 
   
 `-d` : nodes location  
 `-ns` : bridge network setup(if ommited, manual setup will be needed for each node)   
 `-b` : bridge network name(if ommited, defaults to `megatron`)  
   
-    
+   <br>
+<br>
   
   
 # Implementations
