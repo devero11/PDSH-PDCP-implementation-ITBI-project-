@@ -5,7 +5,7 @@
 # Setup
 <br>  
 
-`copyVM`
+## copyVM
  
 <br>
   
@@ -27,7 +27,7 @@ The clones are indexed from `1` to `n`. In case the script is called multiple ti
  <br> 
  <br> 
 
-`startVMs`  
+## startVMs   
   
 The script `./startVMs` starts up all the VMs in a specified directory.  
 It also allows for the setup of a `bridge network` and `taps` for each VM node.  
