@@ -20,7 +20,7 @@ The clones are indexed from `1` to `n`. In case the script is called multiple ti
 `-n` : number of clones  
   
   
-  
+ <br> 
   
 `startVMs`  
   
@@ -28,6 +28,7 @@ The script `./startVMs` starts up all the VMs in a specified directory.
 It also allows for the setup of a `bridge network` and `taps` for each VM node.  
 
 !!! Important  
+  
 To ensure each VM node gets assigned a `static ip` automatically you must have a `dhcp server` running on your `bridge network`.  
 The script does not include etc/hosts mappings for each node(not planned for now sorry :3)   
 The `bridge network` is not persistent.  
