@@ -1,91 +1,88 @@
-# DESCRIEREA PROBLEMEI
+## Documentație Proiect
 
-  de ce e nevoie?
-    --operarea mai multor sisteme/noduri in acelasi timp/in masa
-    --exemplu: serviciu de servere(amazon ec2), setup multiple sisteme intr-un office
+## 1. Descrierea Problemei
 
+### De ce este necesar?
 
+* Operarea simultană și în masă a **mai multor sisteme/noduri** (management de cluster).
+* **Exemplu de caz de utilizare:**
+    * Servicii de servere (ex: Amazon EC2).
+    * Configurarea multiplă de sisteme într-un mediu de birou.
 
-  solutii posibile:
-    --reimplementare pdsh(rulare comenzi), pdcp(upload fisiere), rpdcp(download fisiere)
+### Soluții Posibile
 
+Reimplementarea utilitarelor standard pentru execuția paralelă de comenzi și transferul de fișiere:
+* **`pdsh`**: Rularea de comenzi în paralel.
+* **`pdcp`**: Încărcarea (upload) de fișiere în paralel.
+* **`rpdcp`**: Descărcarea (download) de fișiere în paralel.
 
+---
 
-#SPECIFICATIA SOLUTIEI
+## 2. Specificația Soluției
 
-  obiective:
-    --deployment usor al nodurilor de VMuri
-    --reimplementare comenzi
+### Obiective
 
-  mediu de rulare
-    --ruleaza in terminal
+* **Deployment ușor** al nodurilor de Mașini Virtuale (VM-uri).
+* **Reimplementarea** funcționalităților cheie ale comenzilor `pdsh/pdcp/rpdcp`.
 
-  cerinte:
-    --linux
-    --bash
-    --python
-    --ssh/scp
-    --kvm and qemu
+### Mediu de Rulare
 
-  limitari:
-    --setup noduri nu adauga hostname in etc/hosts
-    --probabil logging system limitat
+* Soluția rulează în **terminal**.
 
-  plan evaluare:
-    -- script pentru teste cu use case-uri
+### Cerințe Tehnice
 
+* Sistem de operare: **Linux**.
+* Shell: **Bash**.
+* Limbaj de programare: **Python**.
+* Protocol: **SSH/SCP** (pentru conectare securizată).
+* Virtualizare: **KVM** și **QEMU**.
 
-#DESIGN
+### Limitări
 
+* Configurarea nodurilor **nu** adaugă automat `hostname`-uri în fișierul `/etc/hosts`.
+* Sistemul de *logging* (monitorizare) este **probabil limitat**.
 
-  diagrama:
-                DHCP SERVER
-                     |
-              BRIDGE NETWORK
-            /        |        \
-          Tap 1     Tap..     TapN
-            |        |         |
-           VM1      VM..      VMn
-            \        |        /
-              PDSH/PDCP/RPDCP
-                     |
-                USER SYSTEM
+### Plan de Evaluare
 
+* Dezvoltarea unui **script de teste** bazat pe cazuri de utilizare (use case-uri).
 
-  explicatii:
-    --folosim bridge network cu un server DHCP pentru a avea ip static si unic pentru fiecare vm automat
-    --in lipsa unui ip unic nu avem acces la VMuri
+---
 
-    --am ales metoda asta in defavoarea qemu-guest-agent deoarece aceasta metoda permite conectarea universala la vmuri si sisteme
-    inafara spcificatiei proiectului
-
-  descrierea mecanismelor:
-    --DHCP server ruleaza pe bridge network pentru a forta VMurile sa aiba ip static unic si sa fie accesibile pentru USER
-    --Comenzile pdsh/pdcp/rpdcp se folosesc de ssh/scp pentru conectare securizata in paralel la toate nodurile. Python(AWK?) e folosit
-    pentru manipularea argumentelor primite de scripturile bash.
+## 3. Design
 
 
+### Explicații de Design
 
-#IMPLEMENTARE
+* **Rețeaua Bridge și DHCP**: Se folosește un `bridge network` cu un **server DHCP** pentru a asigura un **IP static și unic** pentru fiecare VM în mod automat.
+    * *Motivație*: Fără un IP unic și cunoscut, VM-urile nu pot fi accesate.
+* **Alegerea Metodei**: Această metodă a fost aleasă în detrimentul `qemu-guest-agent` deoarece permite o **conectare universală** atât la VM-uri, cât și la sisteme externe, din afara specificațiilor inițiale ale proiectului.
 
-  Stack folosit:
-    --python(awk?) -manipulare stringuri
-    --ssh/scp - conectare securizata la noduri
-    --qemu - interfata pentru rularea VMurilor folosind kvm
-    --alpine linux - distro lightweight pentru VMuri
-    --git/github - version control
+### Descrierea Mecanismelor
 
+* **DHCP Server**: Rulează pe `bridge network` pentru a forța VM-urile să obțină un **IP static și unic**, făcându-le accesibile pentru **USER**.
+* **Comenzi PDSH/PDCP/RPDCP**: Utilizează protocoalele **SSH/SCP** pentru o conectare securizată și **paralelă** la toate nodurile.
+    * **Python (sau AWK)** este folosit pentru **manipularea și prelucrarea argumentelor** primite de scripturile Bash.
 
-  probleme aparute:
-    --atribuirea ipurilor unice pt VMuri
-    solutie: got good
-    --server dhcp blocat de firewall
-    solutie: adaugare exceptie in firewall pentru dhcp
+---
 
+## 4. Implementare
 
+### Stack Tehnologic
 
+* **Python (AWK?)**: Pentru manipularea șirurilor de caractere (stringuri).
+* **SSH/SCP**: Conectare securizată la noduri.
+* **QEMU**: Interfață pentru rularea VM-urilor folosind **KVM**.
+* **Alpine Linux**: Distribuție *lightweight* aleasă pentru VM-uri.
+* **Git/GitHub**: Pentru controlul versiunilor (*version control*).
 
+### Probleme Apărute & Soluții
 
+| Problemă | Soluție |
+| :--- | :--- |
+| Atribuirea IP-urilor unice pentru VM-uri | Obținerea unui IP static (Soluție: `got good`) |
+| Serverul DHCP blocat de firewall | Adăugarea unei excepții în firewall pentru serviciul DHCP |
+
+---
 # MOD DE FOLOSIRE
 
 !!! Funcționalitate limitată, work in progress !!!
