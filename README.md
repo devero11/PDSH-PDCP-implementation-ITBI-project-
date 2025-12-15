@@ -1,10 +1,16 @@
+<div align="center">
+
 # REIMPLEMENTAREA PDSH/PDCP
-## `Dendiu Denis-Cristian | Nicolescu Radu-Mihai | Ursu Arsenie`
+
+## Dendiu Denis-Cristian 
+## Nicolescu Radu-Mihai 
+## Ursu Arsenie
   
 Universitatea din Bucuresti  
 Departamentul de Informatica  
 Instrumente si tehnici de baza in informatica  
 2025-2026  
+</div>
 
 <br>
 
