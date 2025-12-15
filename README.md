@@ -1,10 +1,20 @@
-## Documentație Proiect
+# REIMPLEMENTAREA PDSH/PDCP
+## `Dendiu Denis-Cristian | Nicolescu Radu-Mihai | Ursu Arsenie`
+  
+Universitatea din Bucuresti  
+Departamentul de Informatica  
+Instrumente si tehnici de baza in informatica  
+2025-2026  
+
+<br>
+
+# Documentație Proiect
 
 ## 1. Descrierea Problemei
 
 ### De ce este necesar?
 
-* Operarea simultană și în masă a **mai multor sisteme/noduri** (management de cluster).
+* Operarea simultană și în masă a `mai multor sisteme/noduri` (management de cluster).
 * **Exemplu de caz de utilizare:**
     * Servicii de servere (ex: Amazon EC2).
     * Configurarea multiplă de sisteme într-un mediu de birou.
@@ -36,6 +46,7 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 * Limbaj de programare: **Python**.
 * Protocol: **SSH/SCP** (pentru conectare securizată).
 * Virtualizare: **KVM** și **QEMU**.
+* Server DHCP: dnsmasq
 
 ### Limitări
 
@@ -79,6 +90,7 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 * **SSH/SCP**: Conectare securizată la noduri.
 * **QEMU**: Interfață pentru rularea VM-urilor folosind **KVM**.
 * **Alpine Linux**: Distribuție *lightweight* aleasă pentru VM-uri.
+* **Dnsmasq**: Pentru crearea serverului DHCP.
 * **Git/GitHub**: Pentru controlul versiunilor (*version control*).
 
 ### Probleme Apărute & Soluții
