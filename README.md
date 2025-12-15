@@ -168,7 +168,7 @@ Scriptul `./mypdsh` permite rularea de comenzi tip `bash` pe multiple noduri in 
 ```
 <br>
 
-`-w` : specifica nodurile la care dorim executia comenzilor  
+`-w` : specifica nodurile la care dorim executia comenzilor   
 `-x` : specifica nodurile care sa fie excluse din executie  
 `%u` : username la care se conecteaza ssh    
 `%h` : hostname nod  
@@ -184,7 +184,7 @@ Scriptul `./mypdcp` copiaza fisiere de pe systemul local pe noduri
 ```
 <br>
 
-`-w` : specifica nodurile la care dorim transferul
+`-w` : specifica nodurile la care dorim transferul  
 `-x` : specifica nodurile care sa fie excluse din transfer  
 `%u` : username la care se conecteaza ssh    
 `%h` : hostname nod  
@@ -200,7 +200,7 @@ Scriptul `./myrpdcp` este procesul `mypdcp` inversat. Transfera fisiere remote p
 ```
 <br>
 
-`-w` : specifica nodurile la care dorim transferul
+`-w` : specifica nodurile la care dorim transferul  
 `-x` : specifica nodurile care sa fie excluse din transfer  
 `%u` : username la care se conecteaza ssh    
 `%h` : hostname nod  
