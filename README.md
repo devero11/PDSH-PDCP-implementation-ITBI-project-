@@ -2,9 +2,10 @@
 
 # REIMPLEMENTAREA PDSH/PDCP
 
-## Dendiu Denis-Cristian 
-## Nicolescu Radu-Mihai 
-## Ursu Arsenie
+## Autori
+Dendiu Denis-Cristian 
+Nicolescu Radu-Mihai 
+Ursu Arsenie
   
 Universitatea din Bucuresti  
 Departamentul de Informatica  
