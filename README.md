@@ -155,3 +155,55 @@ Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planifi
 
 <br>
 
+
+# Usage
+
+## `mypdsh`
+
+Scriptul `./mypdsh` permite rularea de comenzi tip `bash` pe multiple noduri in paralel prin o singura comanda.
+
+```bash
+./mypdsh -w [hostnames] -x [hostnames] [commands]
+
+```
+<br>
+
+`-w` : specifica nodurile la care dorim executia comenzilor  
+`-x` : specifica nodurile care sa fie excluse din executie  
+`%u` : username la care se conecteaza ssh    
+`%h` : hostname nod  
+
+
+## `mypdcp`
+
+Scriptul `./mypdcp` copiaza fisiere de pe systemul local pe noduri
+
+```bash
+./mypdcp -w [hostnames] -x [hostnames] [localFile] [remotePath]
+
+```
+<br>
+
+`-w` : specifica nodurile la care dorim transferul
+`-x` : specifica nodurile care sa fie excluse din transfer  
+`%u` : username la care se conecteaza ssh    
+`%h` : hostname nod  
+
+
+
+## `myrpdcp`
+
+Scriptul `./myrpdcp` este procesul `mypdcp` inversat. Transfera fisiere remote pe masina locala  
+```bash
+./myrpdcp -w [hostnames] -x [hostnames] [localFile] [remotePath]
+
+```
+<br>
+
+`-w` : specifica nodurile la care dorim transferul
+`-x` : specifica nodurile care sa fie excluse din transfer  
+`%u` : username la care se conecteaza ssh    
+`%h` : hostname nod  
+
+
+
