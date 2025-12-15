@@ -1,6 +1,6 @@
 <div align="center">
 
-# REIMPLEMENTAREA PDSH/PDCP
+# REIMPLEMENTARE PDSH/PDCP
 
 ## Autori
 **Dendiu Denis-Cristian**  
@@ -33,7 +33,6 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 * **`pdcp`**: Încărcarea (upload) de fișiere în paralel.
 * **`rpdcp`**: Descărcarea (download) de fișiere în paralel.
 
----
 
 ## 2. Specificația Soluției
 
@@ -64,7 +63,6 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 
 * Dezvoltarea unui **script de teste** bazat pe cazuri de utilizare (use case-uri).
 
----
 
 ## 3. Design
 
@@ -87,7 +85,6 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 * **Comenzi PDSH/PDCP/RPDCP**: Utilizează protocoalele **SSH/SCP** pentru o conectare securizată și **paralelă** la toate nodurile.
     * **Python (sau AWK)** este folosit pentru **manipularea și prelucrarea argumentelor** primite de scripturile Bash.
 
----
 
 ## 4. Implementare
 
