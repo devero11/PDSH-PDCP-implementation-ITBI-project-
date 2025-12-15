@@ -116,7 +116,7 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 
 <br>
 
-Scriptul `./copyVM` creează un număr specificat de copii ale unei imagini VM date.
+Scriptul `./copyVM` creează un număr specificat de copii ale unei imagini VM date.  
 Clonele sunt indexate de la `1` la `n`. În cazul în care scriptul este rulat de mai multe ori, indexul continuă de la ultimul clone creat.
 
 ```bash
@@ -126,20 +126,20 @@ Clonele sunt indexate de la `1` la `n`. În cazul în care scriptul este rulat d
 
 <br>
 
-`-i` : locația imaginii VM
+`-i` : locația imaginii VM  
 `-n` : numărul de clone
 
 <br>
 
 ## `startVMs`
 
-Scriptul `./startVMs` pornește toate VM-urile dintr-un director specificat.
-De asemenea, permite configurarea unui `bridge network` și a unor `tap-uri` pentru fiecare nod VM.
+Scriptul `./startVMs` pornește toate VM-urile dintr-un director specificat.  
+De asemenea, permite configurarea unui `bridge network` și a unor `tap-uri` pentru fiecare nod VM.  
 
 !!! Important
 
-Pentru a te asigura că fiecare nod VM primește automat un `ip static`, trebuie să ai un `server dhcp` care rulează pe `bridge network`.
-Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planificat momentan, sorry :3).
+Pentru a te asigura că fiecare nod VM primește automat un `ip static`, trebuie să ai un `server dhcp` care rulează pe `bridge network`.  
+Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planificat momentan, sorry :3).  
 `Bridge network-ul` nu este persistent.
 
 ```bash
@@ -149,9 +149,9 @@ Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planifi
 
 <br>
 
-`-d` : locația nodurilor
-`-ns` : setup pentru bridge network (dacă este omis, va fi necesar setup manual pentru fiecare nod)
-`-b` : numele pentru bridge network (dacă este omis, valoarea implicită este `megatron`)
+`-d` : locația nodurilor  
+`-ns` : setup pentru bridge network (dacă este omis, va fi necesar setup manual pentru fiecare nod)  
+`-b` : numele pentru bridge network (dacă este omis, valoarea implicită este `megatron`)  
 
 <br>
 
