@@ -1,19 +1,67 @@
 #!/bin/bash
 
-folder="./VMs"
-original="$folder/foo1.qcow2"
+image=""
+number=""
 
-n="$1"
+folder="./VMs"
+original="./VMs/foo1.qcow2"
+
+
+#parse flags
+while getopts ":i:n:" opt; do
+  case $opt in
+    i)
+      image="$OPTARG"  # Save the string after -i
+      ;;
+    n)
+      number="$OPTARG" # Save the number after -n
+      ;;
+    \?)
+      echo "Error: Invalid option -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Error: Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+
+#validate inputs
+if [[ -z "$image" ]]; then
+  echo "Error: -i <string> is required" >&2
+  exit 1
+fi
+
+if [[ -z "$number" ]]; then
+  echo "Error: -n <number> is required" >&2
+  exit 1
+fi
+
+#number check
+if ! [[ "$number" =~ ^[0-9]+$ ]]; then
+  echo "Error: -n argument must be a number" >&2
+  exit 1
+fi
+
+
+
+
+
+
 
 last=$(ls "$folder"/foo* 2>/dev/null | sort | tail -n 1)
 
-num=${last##*foo}
-num=${num%.*}
+num=${last%.*}
+echo $num
+num=${num//[^0-9]/}
+echo $num
 
-next=$((num + 1))
-
-for ((i=0; i<n; i++))
-do
-    cp "$original" "$folder/foo$((next + i)).qcow2"
-done
-
+#next=$((num + 1))
+#
+#for ((i=0; i<n; i++))
+#do
+#    cp "$original" "$folder/foo$((next + i)).qcow2"
+#done
+#

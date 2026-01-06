@@ -73,3 +73,10 @@ for entry in ./VMs/foo*; do
 
 
 d
+
+
+
+
+
+sudo firewall-cmd --add-service=dhcp --permanent
+sudo firewall-cmd --reload
