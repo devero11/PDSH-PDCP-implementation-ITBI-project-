@@ -143,15 +143,14 @@ Scriptul nu include mapări în `/etc/hosts` pentru fiecare nod (nu este planifi
 `Bridge network-ul` nu este persistent.
 
 ```bash
-./startVMs -d [directory] -ns -b [bridgeName]
+./startVMs -d [directory] -n
 
 ```
 
 <br>
 
 `-d` : locația nodurilor  
-`-ns` : setup pentru bridge network (dacă este omis, va fi necesar setup manual pentru fiecare nod)  
-`-b` : numele pentru bridge network (dacă este omis, valoarea implicită este `megatron`)  
+`-n` : setup pentru bridge network (dacă este omis, va fi necesar setup manual pentru fiecare nod)  
 
 <br>
 

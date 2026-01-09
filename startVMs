@@ -1,46 +1,35 @@
 #!/bin/bash
 
-echo Creating Bridge Network
+source ./lib/validate_flags_start
+source ./lib/bridge_network_setup
 
-ip link add name testBridge type bridge
-ip addr add 192.168.100.1/24 dev testBridge
-ip link set testBridge up
+##############################################
+netSetup=false
+
+##############################################
+parse_args "$@"  #validate_flags_start
+validate_args
 
 
-echo Creating Taps 
+##############################################
+if $netSetup; then
+  network_setup  #bridge_network_setup
+fi
+
 
 i=1
-for entry in ./VMs/foo*; do
-  
-  ip tuntap add dev tap$i mode tap user $(whoami)
-  ip link set tap$i master testBridge 
-  ip link set dev tap$i up
- 
-  ((i++))
-
-done
-
-
-
-service dnsmasq restart
-
-
-echo Launching VMs
-
-i=1
-for entry in ./VMs/foo*; do
+for entry in ./VMs/*.qcow2; do
   idx=$i
   ((i++))
-
+  
   qemu-system-x86_64 \
   -enable-kvm \
   -m 512 \
   -cpu host \
   -smp 2 \
-  -drive file=./VMs/foo$idx.qcow2,format=qcow2 \
+  -drive file=$entry,format=qcow2 \
   -nographic \
   -netdev tap,id=net$idx,ifname=tap$idx,script=no,downscript=no \
   -device e1000,netdev=net$idx,mac=52:54:00:00:00:0$idx \
   &
-
 done

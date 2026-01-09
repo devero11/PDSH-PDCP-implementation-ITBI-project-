@@ -1,0 +1,22 @@
+#!/bin/bash
+
+network_setup(){
+  echo Creating Bridge Network
+  ip link add name br_cluster type bridge
+  ip addr add 192.168.100.1/24 dev br_cluster
+  ip link set br_cluster up
+  
+  echo Creating Taps 
+  i=1
+  for entry in ./VMs/*.qcow2; do
+    ip tuntap add dev tap$i mode tap user $(whoami)
+    ip link set tap$i master br_cluster 
+    ip link set dev tap$i up
+   
+    ((i++))
+  done
+  service dnsmasq restart
+}
+
+
+

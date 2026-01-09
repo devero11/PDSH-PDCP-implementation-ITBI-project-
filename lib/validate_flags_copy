@@ -1,0 +1,36 @@
+#!/bin/bash
+
+##############################################
+parse_args(){
+  while getopts ":i:n:" opt; do
+    case $opt in
+      i) image="$OPTARG" ;;
+      n) number="$OPTARG" ;;
+      \?) echo "Error: Invalid option -$OPTARG" >&2 exit 1 ;;
+      :) echo "Error: Option -$OPTARG requires an argument." >&2 exit 1 ;;
+    esac
+  done
+}
+
+##############################################
+validate_args(){
+  if [[ -z "$image" ]]; then
+    echo "Error: -i <string> is required" >&2
+    exit 1
+  fi
+  if [[ ! -f "$image" ]]; then
+    echo "Error: Image doesn't exist " >&2
+    exit 1
+  fi
+
+  if [[ -z "$number" ]]; then
+    echo "Error: -n <number> is required" >&2
+    exit 1
+  fi
+
+  #number check
+  if ! [[ "$number" =~ ^[0-9]+$ ]]; then
+    echo "Error: -n argument must be a number" >&2
+    exit 1
+  fi
+}

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+##############################################
+parse_args(){
+
+  while getopts ":d:n" opt "$@"; do
+    case $opt in
+      n) netSetup=true ;;
+      d) directory="$OPTARG" ;;
+      \?) echo "Error: Invalid option -$OPTARG" >&2; exit 1 ;;
+      :) echo "Error: Option -$OPTARG requires an argument." >&2; exit 1 ;;
+    esac
+  done
+}
+
+##############################################
+validate_args(){
+  if [[ -z "$directory" ]]; then
+    echo "Error: -d <path> is required" >&2
+    exit 1
+  fi
+  if [[ ! -d "$directory" ]]; then
+    echo "Error: Path doesn't exist" >&2
+    exit 1
+  fi
+
+}

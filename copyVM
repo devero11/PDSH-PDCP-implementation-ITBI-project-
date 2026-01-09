@@ -1,67 +1,38 @@
 #!/bin/bash
 
+source ./lib/validate_flags_copy
+
+##############################################
 image=""
 number=""
 
-folder="./VMs"
-original="./VMs/foo1.qcow2"
-
-
+##############################################
 #parse flags
-while getopts ":i:n:" opt; do
-  case $opt in
-    i)
-      image="$OPTARG"  # Save the string after -i
-      ;;
-    n)
-      number="$OPTARG" # Save the number after -n
-      ;;
-    \?)
-      echo "Error: Invalid option -$OPTARG" >&2
-      exit 1
-      ;;
-    :)
-      echo "Error: Option -$OPTARG requires an argument." >&2
-      exit 1
-      ;;
-  esac
-done
+#defined in validate_flags_copy
+parse_args "$@"
+validate_args
 
+##############################################
+folder="./VMs"
+original="$image"
+image=$(basename "$image")
 
-#validate inputs
-if [[ -z "$image" ]]; then
-  echo "Error: -i <string> is required" >&2
-  exit 1
-fi
-
-if [[ -z "$number" ]]; then
-  echo "Error: -n <number> is required" >&2
-  exit 1
-fi
-
-#number check
-if ! [[ "$number" =~ ^[0-9]+$ ]]; then
-  echo "Error: -n argument must be a number" >&2
-  exit 1
-fi
-
-
-
-
-
-
-
-last=$(ls "$folder"/foo* 2>/dev/null | sort | tail -n 1)
-
+##############################################
+#find last index in folder
+image=${image%.*}
+last=$(ls "$folder"/$image* 2>/dev/null | sort -V | tail -n 1)
 num=${last%.*}
-echo $num
 num=${num//[^0-9]/}
-echo $num
+if [[ -z "$num" ]]; then
+  num=0
+fi
+next=$((num + 1))
 
-#next=$((num + 1))
-#
-#for ((i=0; i<n; i++))
-#do
-#    cp "$original" "$folder/foo$((next + i)).qcow2"
-#done
-#
+##############################################
+for ((i=0; i<number; i++))
+do
+    cp "$original" "$folder/$image$((next + i)).qcow2"
+done
+echo ""
+echo "###########     Image cloned successfully! :3      ###########"
+echo ""
