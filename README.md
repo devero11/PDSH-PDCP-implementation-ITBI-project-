@@ -61,8 +61,13 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 
 ### Plan de Evaluare
 
-* Dezvoltarea unui **script de teste** bazat pe cazuri de utilizare (use case-uri).
+* In folderul `tests` se afla scripturi bash pentru testare automata a comenzilor
+* Acestea trebuie rulate din folderul principal al proiectului folosind `./tests/pdcp_tests` `./tests/pdsh_tests` `./tests/rpdcp_tests` 
+* Este important ca in folderul VMs sa se afle 5 imagini numite `foo[1-5]`
 
+* Fiecare test pleaca de la aceleasi conditii de executie si testeaza output-ul pentru corectitudine
+
+* Unele teste se folosesc de comanda originala `pdsh` pentu a verifica output-ul pe masinile virtuale
 
 ## 3. Design
 
