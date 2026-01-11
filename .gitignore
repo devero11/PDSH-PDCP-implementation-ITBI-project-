@@ -1,5 +1,5 @@
 
 # .gitignore
 VMs/*.qcow2
-test_image/*.qcow2
+test_image/foo.qcow2
 
