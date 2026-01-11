@@ -49,7 +49,6 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 
 * Sistem de operare: **Linux**.
 * Shell: **Bash**.
-* Limbaj de programare: **Python**.
 * Protocol: **SSH/SCP** (pentru conectare securizată).
 * Virtualizare: **KVM** și **QEMU**.
 * Server DHCP: dnsmasq
@@ -88,14 +87,12 @@ Reimplementarea utilitatilor standard pentru execuția paralelă de comenzi și 
 
 * **DHCP Server**: Rulează pe `bridge network` pentru a forța VM-urile să obțină un **IP static și unic**, făcându-le accesibile pentru **USER**.
 * **Comenzi PDSH/PDCP/RPDCP**: Utilizează protocoalele **SSH/SCP** pentru o conectare securizată și **paralelă** la toate nodurile.
-    * **Python (sau AWK)** este folosit pentru **manipularea și prelucrarea argumentelor** primite de scripturile Bash.
 
 
 ## 4. Implementare
 
 ### Stack Tehnologic
 
-* **Python (AWK?)**: Pentru manipularea șirurilor de caractere (stringuri).
 * **SSH/SCP**: Conectare securizată la noduri.
 * **QEMU**: Interfață pentru rularea VM-urilor folosind **KVM**.
 * **Alpine Linux**: Distribuție *lightweight* aleasă pentru VM-uri.
