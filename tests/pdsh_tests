@@ -1,0 +1,48 @@
+#!/bin/bash
+
+expected_result=""
+
+./mypdsh -w root@foo[1-5] echo "x" > $output
+
+if [[ "$expected_result" == "$output"]];
+then echo "Test 1: OK"
+else echo "Test 1: Failed"
+fi
+
+
+expected_result=""
+
+./mypdsh -w root@foo[1-5] -x root@foo[3-4] echo "x" > $output
+
+if [[ "$expected_result" == "$output"]];
+then echo "Test 2: OK"
+else echo "Test 2: Failed"
+fi
+
+
+expected_result=""
+
+./mypdsh -w root@foo[1-3,4],foo5 echo "x" > $output
+
+if [[ "$expected_result" == "$output"]];
+then echo "Test 3: OK"
+else echo "Test 3: Failed"
+fi
+
+expected_result=""
+
+./mypdsh -w root@foo[1-2] mkdir hello
+
+pdsh -R ssh root@foo[1-2] ls | grep hello > $output
+
+if [[ "$expected_result" == "$output"]];
+then echo "Test 4: OK"
+else echo "Test 4: Failed"
+fi
+
+
+
+
+
+
+
