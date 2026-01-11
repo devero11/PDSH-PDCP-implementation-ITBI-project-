@@ -1,15 +1,10 @@
-#!bin/bash
+#!/bin/bash
 
-STRING="$1"
-USERNAME="$2"
-HOSTNAME="$3"
 
-replace(){
-
-rezultat=$(echo "$STRING" | sed -e "s/%u/$USERNAME/g" -e "s/%h/$HOSTNAME/g")
-
-echo "$rezultat"
+replace_names(){
+  STRING="$2"
+  USERNAME="${1%@*}"
+  HOSTNAME="${1#*@}"
+  STRING=$(echo "$STRING" | sed -e "s/%u/$USERNAME/g" -e "s/%h/$HOSTNAME/g")
 }
 
-
-replace

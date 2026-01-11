@@ -1,32 +1,33 @@
 #!/bin/bash
 
-IFS=','
+#TODO
+#repeat for all scripts
+#write tests
 
-read -ra commaSplit <<< "$1"
+#update documentation
 
+##############################################
+source ./lib/replace_names.sh
+source ./lib/parse_hostnames.sh
 
-for val in "${commaSplit[@]}";
-do
- echo "$val"
-done
+##############################################
+FINAL_NODES=""
 
-for val in "${commaSplit[@]}";
-do
-  mapfile -t brksContent < <(echo "$val" | grep -oP '(?<=\[).*?(?=\])')
-done
+##############################################
+parse_hostname_args "$@"
+exclude_hostnames "$@"
 
+##############################################
+COMMAND="${!#}"
 
+##############################################
+for node in $FINAL_NODES; do
+  replace_names "$node" "$COMMAND"
+  ssh "$node" "$STRING" 2>&1 | while IFS= read -r line; do
+        echo "$HOSTNAME: $line"
+    done &
+done 
 
-for element in "${brksContent[@]}"; do
-    if [[ $element =~ ^[0-9,-]+$ ]]; then
-        echo "'$element' is valid"
-    else
-        echo "'$element' is invalid"
-    fi
-done
+##############################################
+wait
 
-
-
-foo1,foo2,foo3
-foo[1-5]
-foo[1-5,10],foo10

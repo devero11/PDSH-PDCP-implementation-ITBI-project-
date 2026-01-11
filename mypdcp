@@ -1,0 +1,27 @@
+#!/bin/bash
+
+##############################################
+source ./lib/replace_names.sh
+source ./lib/parse_hostnames.sh
+
+##############################################
+FINAL_NODES=""
+
+##############################################
+parse_hostname_args "$@"
+exclude_hostnames "$@"
+
+##############################################
+SOURCE="${@:(-2):1}"
+DESTINATION="${!#}"
+
+##############################################
+for node in $FINAL_NODES; do
+  scp  $SOURCE $node:$DESTINATION 2>&1 | while IFS= read -r line; do
+        echo "$HOSTNAME: $line"
+  done &
+done 
+
+##############################################
+wait
+

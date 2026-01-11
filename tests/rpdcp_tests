@@ -1,40 +1,57 @@
 #!/bin/bash
 
+##############################################
+expected_lines=(
+    "file_to_copy.foo1"
+    "file_to_copy.foo2"
+    "file_to_copy.foo3"
+    "file_to_copy.foo4"
+    "file_to_copy.foo5"
+)
 
-expected_results=""
+pdsh -R ssh -w "root@foo[1-5]" touch file_to_copy 
 
-./myrpdcp -w root@foo[1-2] ./testfile ~ 
+./myrdcp -w "root@foo[1-5]" /root/file_to_copy ./tests/copied_files/
 
-ls | grep "testfile" > $output
+output=$(ls ./tests/copied_files/ 2>&1)
 
-if [[ "$expected_results" == "$output" ]];
-then echo "Test 1: OK"
-else echo "Test 1: Failed"
+all_ok=true
+for line in "${expected_lines[@]}"; do
+    echo "$output" | grep -Fq "$line" || all_ok=false
+done
+
+if $all_ok; then
+    echo "Test 1: OK"
+else
+    echo "Test 1: Failed"
 fi
+pdsh -R ssh -w "root@foo[1-5]" rm "file_to_copy"
+rm ./tests/copied_files/*
 
 
+##############################################
+expected_lines=(
+    "file_to_copy.foo1"
+    "file_to_copy.foo4"
+    "file_to_copy.foo5"
+)
 
-expected_results=""
+pdsh -R ssh -w "root@foo[1-5]" touch file_to_copy 
 
-./myrpdcp -w root@foo[1-3] -x root@foo2 ./testfile ~
+./myrdcp -w "root@foo[1-5]" -x "root@foo[2,3]" /root/file_to_copy ./tests/copied_files/
 
-ls | grep "testfile" > $output
+output=$(ls ./tests/copied_files/ 2>&1)
 
-if [[ "$expected_results" == "$output" ]];
-then echo "Test 2: OK"
-else echo "Test 2: Failed"
+all_ok=true
+for line in "${expected_lines[@]}"; do
+    echo "$output" | grep -Fq "$line" || all_ok=false
+done
+
+if $all_ok; then
+    echo "Test 1: OK"
+else
+    echo "Test 1: Failed"
 fi
-
-
-expected_results=""
-
-./mypdcp -w root@foo[1-2,3],foo4 ./testfile ~
-
-ls | grep "testfile" > $output
-
-if [[ "$expected_results" == "$output" ]];
-then echo "Test 3: OK"
-else echo "Test 3: Failed"
-fi
-
+pdsh -R ssh -x "foo[2,3]" -w "root@foo[1-5]" rm "file_to_copy"
+rm ./tests/copied_files/*
 

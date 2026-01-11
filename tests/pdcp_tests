@@ -1,40 +1,51 @@
 #!/bin/bash
 
+##############################################
+expected_lines=(
+    "foo1: hello_from_local"
+    "foo2: hello_from_local"
+    "foo3: hello_from_local"
+    "foo4: hello_from_local"
+    "foo5: hello_from_local"
+)
 
+./mypdcp -w "root@foo[1-5]" ./tests/copy_files/hello_from_local /root
 
-expected_results=""
+output=$(pdsh -R ssh -w "root@foo[1-5]" ls 2>&1 | grep "hello_from_local")
 
-./mypdcp -w root@foo[1-2] ./testfile ~
+all_ok=true
+for line in "${expected_lines[@]}"; do
+    echo "$output" | grep -Fq "$line" || all_ok=false
+done
 
-pdsh -R ssh root@foo[1-2] ls | grep "testfile" > $output
+if $all_ok; then
+    echo "Test 1: OK"
+else
+    echo "Test 1: Failed"
+fi
+pdsh -R ssh -w "root@foo[1-5]" rm "hello_from_local"
 
-if [[ "$expected_results" == "$output" ]];
-then echo "Test 1: OK"
-else echo "Test 1: Failed"
+##############################################
+expected_lines=(
+    "foo1: hello_from_local"
+    "foo4: hello_from_local"
+    "foo5: hello_from_local"
+)
+
+./mypdcp -w "root@foo[1-5]" -x "root@foo[2,3]" ./tests/copy_files/hello_from_local /root
+
+output=$(pdsh -R ssh -w "root@foo[1-5]" ls 2>&1 | grep "hello_from_local")
+
+all_ok=true
+for line in "${expected_lines[@]}"; do
+    echo "$output" | grep -Fq "$line" || all_ok=false
+done
+
+if $all_ok; then
+    echo "Test 2: OK"
+else
+    echo "Test 2: Failed"
 fi
 
-
-
-expected_results=""
-
-./mypdcp -w root@foo[1-3] -x root@foo2 ./testfile ~
-
-pdsh -R ssh root@foo[1-3] -x root@foo2  ls | grep "testfile" > $output
-
-if [[ "$expected_results" == "$output" ]];
-then echo "Test 2: OK"
-else echo "Test 2: Failed"
-fi
-
-
-expected_results=""
-
-./mypdcp -w root@foo[1-2,3],foo4 ./testfile ~
-
-pdsh -R ssh root@foo[1-2,3],foo4 ls | grep "testfile" > $output
-
-if [[ "$expected_results" == "$output" ]];
-then echo "Test 3: OK"
-else echo "Test 3: Failed"
-fi
+pdsh -R ssh  -x "foo[2,3]" -w "root@foo[1-5]"  rm "hello_from_local"
 
